@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.vaadin.lightvaadin</groupId>
+	<artifactId>vaadin-light</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>vaadin-light</name>
+
+	<prerequisites>
+		<maven>3</maven>
+	</prerequisites>
+
+	<properties>
+		<vaadin.version>8.2.0</vaadin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<!-- If there are no local customizations, this can also be "fetch" or "cdn" -->
+		<vaadin.widgetset.mode>cdn</vaadin.widgetset.mode>
+		<jetty.version>9.2.3.v20140905</jetty.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>vaadin-addons</id>
+			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-server</artifactId>
+            <type>jar</type>
+            <version>${vaadin.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin.external.flute</groupId>
+                    <artifactId>flute</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.vaadin.external.google</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+                <exclusion>
+                   <groupId>com.vaadin</groupId>
+                   <artifactId>vaadin-sass-compiler</artifactId>
+               </exclusion>
+            </exclusions>
+        </dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client-compiled</artifactId>
+			<version>${vaadin.version}</version>
+		</dependency>
+		<!-- Instead of Valo, we use dawn -->
+        <dependency>
+            <groupId>org.peimari</groupId>
+            <artifactId>dawn</artifactId>
+            <version>4</version>
+        </dependency>  
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>${jetty.version}</version>
+            <type>jar</type>
+        </dependency>
+	</dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.vaadin.lightvaadin.App</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> 
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>   
+        </plugins>
+    </build>
+</project>
