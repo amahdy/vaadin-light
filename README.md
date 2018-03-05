@@ -10,7 +10,7 @@ To compile the entire project, run `mvn package`.
 
 ## Running
 
-To run the application, locat the generated `jar` file in the `target` directory, and run `java -jar <filename>.jar`, 
+To run the application, locate the generated `jar` file in the `target` directory, and run `java -jar <filename>.jar`, 
 e.g:
 
 ```bash
