@@ -23,6 +23,8 @@ public class App {
         ServletHolder sh = new ServletHolder(new VaadinServlet());
         contextHandler.addServlet(sh, "/*");
         contextHandler.setInitParameter("ui", MyUI.class.getCanonicalName());
+        // Set other init params like Vaadin productionMode 
+        contextHandler.setInitParameter("productionMode", "true");
 
         server.setHandler(contextHandler);
 
